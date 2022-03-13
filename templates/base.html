@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+
+
+    {% if title %}
+        <title>Daily Journal - {{ title }}</title>
+    {% else %}
+        <title>Daily Journal</title>
+    {% endif %}
+
+  </head>
+  <body class="">
+
+    <div class="search-form-container fade" id="search-container">
+        <div class="search-form-container-inner">
+
+            <form method="POST" action="{{ url_for('search') }}" class="search-form">
+                {{ form.hidden_tag() }}
+                <input type="search" class="search-input m-1" placeholder="Search" name="searched">
+                <button class="btn link search-btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search">
+                    <i class="ri-search-line"></i>
+                </button>
+            </form>
+
+            <button class="form-close-btn" id="search-close-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Close">
+                <i class="ri-close-line"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="container nav-div rounded shadow-lg">
+        <nav class="navbar navbar-expand-sm" id="main-nav">
+            <div class="container-fluid">
+            <a class="navbar-brand brand link" href="/">DAILY JOURNAL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link" href="/post/new">Compose</a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <!-- <form method="POST" action="{{ url_for('search') }}" class="d-flex nav-item m-1">
+                        {{ form.hidden_tag() }}
+                        <input type="search" class="form-control m-1" placeholder="Search" name="searched">
+                        <button class="btn btn-outline-danger m-1" type="submit">Search</button>
+                    </form> -->
+                    <li class="nav-item">
+                        <button class="nav-link link cri" id="search-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search">
+                            <i class="nav-link link ri-search-line"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link link cri" id="theme-toggle-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Theme">
+                            <i class="nav-link link ri-sun-line sun-icon"></i>
+                            <i class="nav-link link ri-moon-line moon-icon"></i>
+                        </button>
+                        
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </div>
+    
+    <hr>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} d-flex alert-dismissible fade show" role="alert">
+                        <div>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+
+        <div class="footer-div">
+            <footer class="d-flex flex-wrap align-items-center py-3 my-4 font-monospace">
+                <p class="copyright shadow-lg rounded">© 2022 Musa</p>
+            </footer>
+        </div> 
+
+    </div>
+
+         
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>  
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

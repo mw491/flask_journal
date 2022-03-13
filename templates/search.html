@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>You Searched "{{ searched }}"</h2>
+    <br/>
+
+    {% if not post %}
+
+        {% for post in posts.items %}
+            <article class="card mb-3 shadow-lg p-3 rounded border border-secondary">
+                <div class="card-header">Posted on {{ post.date }}</div>
+                <div class="card-body">
+                    <h6 class="card-title"><a class="stretched-link post-title link-red" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h6>
+                    <p class="card-text post-truncate">{{ post.content|safe }}</p>
+                </div>
+            </article>
+            <hr>
+        {% endfor %}
+
+    {% else %}
+
+        <h3>No Results</h3>
+
+    {% endif %}
+{% endblock content %}

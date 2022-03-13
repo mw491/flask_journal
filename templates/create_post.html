@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="mb-4">{{ action }}</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <p>Post Title</p>
+            {{ form.title(class="form-control input") }}
+            <br/>
+            <br/>
+            <p>Post Content</p>
+            {{ form.content(class="form-control input", rows=10) }}
+            <br/>
+            {{ form.submit(class="btn btn-outline-danger") }}
+        </div>
+    </form>
+    
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='content', custom_config="uiColor: '#21252988'") }}
+    
+    <hr>
+{% endblock content %}

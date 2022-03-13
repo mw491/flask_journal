@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Flask Blog DB",
+            "group": "Flask",
+            "database": "${workspaceFolder:journal}/posts.db"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Flask Blog DB",
+            "group": "Flask",
+            "database": "${workspaceFolder:journal}/posts.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
